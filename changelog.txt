@@ -1,4 +1,15 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.0.1
+Date: 2020-12-15
+
+  Chore:
+    - Update to factorio 1.1
+
+  Fix:
+    - On player creation, visibility setting is now taken into account
+    - Fix a crash happening when adding the mod in an existing game
+
+---------------------------------------------------------------------------------------------------
 Version: 1.0.0
 Date: 2020-05-15
 

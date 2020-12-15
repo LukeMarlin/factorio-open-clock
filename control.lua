@@ -1,5 +1,27 @@
+function _init_player(player)
+    if global[player.index] == nil then
+    -- We have no reference to the UI but it might be there, trying to get it
+        global[player.index] = player.gui.top.open_clock
+        if global[player.index] ~= nil then
+            return
+        end
+    end
+
+    global[player.index] = player.gui.top.add{type="button", name="open_clock", enabled=false}
+    if settings.get_player_settings(player)["open-clock-ui-visible"].value == "yes" then
+        global[player.index].visible = true
+    end
+end
+
 function update_clock(player)
-   local clock_button = global[player.index]
+    if global[player.index] == nil then
+        -- Settings says that clock should be visible but UI is not present
+        -- this happens when adding the mod mid-game, players are already there
+        -- so "player_created" event isn't fired
+        _init_player(player)
+    end
+
+    local clock_button = global[player.index]
 
     -- daytime is between 0 and 1. 0 == 1 and therefore both are the middle of the clock
     -- shift by 0.5 to avoid dealing with negatives, giving 0.5 -> 1 -> 1.5
@@ -24,16 +46,7 @@ end
 
 function init_player(e)
     local player = game.connected_players[e.player_index]
-    if global[player.index] == nil then
-    -- We have no reference to the UI but it might be there, trying to get it
-        global[player.index] = player.gui.top.open_clock
-        if global[player.index] ~= nil then
-            return
-        end
-    end
-
-    global[player.index] = player.gui.top.add{type="button", name="open_clock", enabled=false}
-    -- global[player.index].visible = true -- TODO: from config!
+    _init_player(player)
 end
 
 script.on_event({defines.events.on_player_created}, init_player)
