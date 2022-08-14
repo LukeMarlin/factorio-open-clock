@@ -34,7 +34,7 @@ function update_clock(player)
 end
 
 function config_update(e)
-    local player = game.connected_players[e.player_index]
+    local player = game.get_player(e.player_index)
     if e.setting == "open-clock-ui-visible" then
         if settings.get_player_settings(player)["open-clock-ui-visible"].value == "yes" then
             global[e.player_index].visible = true
@@ -45,7 +45,7 @@ function config_update(e)
 end
 
 function init_player(e)
-    local player = game.connected_players[e.player_index]
+    local player = game.get_player(e.player_index)
     _init_player(player)
 end
 

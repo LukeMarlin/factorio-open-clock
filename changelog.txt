@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.0.2
+Date: 2022-08-14
+
+  Fix:
+    - Fix a crash when a player joined multiplayer mid-game by using `get_player` instead of looking into `connected_players`
+
+---------------------------------------------------------------------------------------------------
 Version: 1.0.1
 Date: 2020-12-15
 
